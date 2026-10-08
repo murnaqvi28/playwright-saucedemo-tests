@@ -3,6 +3,7 @@ export class InventoryPage {
     this.page = page;
     this.products = page.locator('.inventory_item');
     this.cartBadge = page.locator('.shopping_cart_badge');
+    this.cartLink = page.locator('.shopping_cart_link');
   }
 
   async addToCart(productName) {
@@ -10,12 +11,16 @@ export class InventoryPage {
       .filter({ hasText: productName })
       .getByRole('button', { name: 'Add to cart' })
       .click();
-  }
+  };
 
   async removeFromCart(productName){
     await this.products
       .filter({ hasText: productName })
       .getByRole('button', { name: 'Remove' })
       .click();
+  };
+
+  async openCart(){
+    await this.cartLink.click();
   }
 }
